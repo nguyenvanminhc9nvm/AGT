@@ -19,6 +19,42 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "notSet"
+
+    productFlavors {
+        Prod {
+            buildConfigField 'String', 'API_HOST', '"https://kajiken-app.biz/api/v1"'
+            dimension "notSet"
+            manifestPlaceholders = [usesCleartextTraffic: "false"]
+            signingConfig signingConfigs.debug
+        }
+        Staging {
+            buildConfigField 'String', 'API_HOST', '"https://ik1-423-43847.vs.sakura.ne.jp/api/v1"'
+            dimension "notSet"
+            manifestPlaceholders = [usesCleartextTraffic: "false"]
+            signingConfig signingConfigs.debug
+        }
+        Dev {
+            buildConfigField 'String', 'API_HOST', '"http://192.168.1.100:6969/api/v1"'
+            dimension "notSet"
+            manifestPlaceholders = [usesCleartextTraffic: "false"]
+            signingConfig signingConfigs.debug
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def flavor = variant.flavorName
+            def buildType = variant.buildType.name.capitalize()
+            def versionName = variant.versionName
+            def versionCode = variant.versionCode
+
+            def date = new Date()
+            def formattedDate = date.format('yyMMdd_HHmm')
+            def appName = "Kajiken${flavor}${buildType}_${versionName}.${versionCode}_${formattedDate}.apk"
+            outputFileName = appName
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -51,6 +87,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -80,5 +117,11 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences-rxjava3:1.0.0-alpha06"
 
     implementation 'com.jakewharton.rxbinding4:rxbinding:4.0.0'
+
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 
 }

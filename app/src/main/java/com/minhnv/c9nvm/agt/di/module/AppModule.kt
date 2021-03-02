@@ -1,6 +1,8 @@
 package com.minhnv.c9nvm.agt.di.module
 
 import android.content.Context
+import com.minhnv.c9nvm.agt.data.AppDataManager
+import com.minhnv.c9nvm.agt.data.DataManager
 import com.minhnv.c9nvm.agt.data.local.AppDataStoreHelper
 import com.minhnv.c9nvm.agt.data.local.DataStoreHelper
 import com.minhnv.c9nvm.agt.data.remote.ApiHelper
@@ -29,6 +31,12 @@ class AppModule {
     @Singleton
     fun providerAppDataStore(context: Context): DataStoreHelper {
         return AppDataStoreHelper(context)
+    }
+
+    @Provides
+    @Singleton
+    fun providerDataManager(apiHelper: ApiHelper): DataManager {
+        return AppDataManager(apiHelper)
     }
 
 }

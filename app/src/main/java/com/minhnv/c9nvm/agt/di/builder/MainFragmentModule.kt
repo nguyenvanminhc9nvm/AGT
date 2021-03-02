@@ -8,6 +8,7 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class MainFragmentModule {
+
     @ContributesAndroidInjector
     abstract fun comicFragment(): ComicFragment
 
@@ -16,4 +17,5 @@ abstract class MainFragmentModule {
 
     @ContributesAndroidInjector
     abstract fun sportFragment(): SportFragment
+
 }

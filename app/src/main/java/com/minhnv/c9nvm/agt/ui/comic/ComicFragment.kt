@@ -1,31 +1,28 @@
 package com.minhnv.c9nvm.agt.ui.comic
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.minhnv.c9nvm.agt.R
+import com.minhnv.c9nvm.agt.databinding.ComicFragmentBinding
+import com.minhnv.c9nvm.agt.ui.base.BaseFragment
 
-class ComicFragment : Fragment() {
+class ComicFragment : BaseFragment<ComicViewModel, ComicFragmentBinding>() {
 
-    private lateinit var dashboardViewModel: ComicViewModel
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> ComicFragmentBinding
+        get() = ComicFragmentBinding::inflate
 
-    override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(ComicViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-            textView.text = it
-        })
-        return root
+    override fun createViewModel(): Class<ComicViewModel> {
+        return ComicViewModel::class.java
     }
+
+    override fun initView() {
+
+    }
+
+    override fun bindViewModel() {
+
+    }
+
+
+
+
 }

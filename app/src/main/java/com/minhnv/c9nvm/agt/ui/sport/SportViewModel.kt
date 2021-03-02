@@ -1,13 +1,7 @@
 package com.minhnv.c9nvm.agt.ui.sport
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.minhnv.c9nvm.agt.ui.base.BaseViewModel
 
-class SportViewModel : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
-    }
-    val text: LiveData<String> = _text
+class SportViewModel : BaseViewModel() {
+    // TODO: Implement the ViewModel
 }

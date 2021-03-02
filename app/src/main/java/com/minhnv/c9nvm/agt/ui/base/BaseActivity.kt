@@ -18,7 +18,7 @@ import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 
-abstract class BaseActivity<V: BaseViewModel, VB: ViewBinding> : DaggerAppCompatActivity() {
+abstract class BaseActivity<V: BaseViewModel, VB: ViewBinding> : DaggerAppCompatActivity(), ActivityController {
     @Inject
     lateinit var schedulerProvider: SchedulerProvider
 
@@ -56,6 +56,7 @@ abstract class BaseActivity<V: BaseViewModel, VB: ViewBinding> : DaggerAppCompat
         mProgressDialog = ProgressDialog(this)
         viewModel = viewModelFactory.create(createViewModel())
         _binding = bindingInflater.invoke(layoutInflater)
+        setContentView(_binding?.root)
         initView()
         bindLoading()
         bindViewModel()

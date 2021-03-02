@@ -8,6 +8,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel : ViewModel() {
+
     lateinit var mDataManager: DataManager
 
     lateinit var mScheduler: SchedulerProvider
@@ -34,5 +35,10 @@ abstract class BaseViewModel : ViewModel() {
         mCompositeDisposable.clear()
     }
 
+
+    fun initData(dataManager: DataManager, scheduler: SchedulerProvider) {
+        this.mDataManager = dataManager
+        this.mScheduler = scheduler
+    }
 
 }
