@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import com.minhnv.c9nvm.agt.R
 import com.minhnv.c9nvm.agt.ViewModelProviderFactory
 import com.minhnv.c9nvm.agt.data.DataManager
 import com.minhnv.c9nvm.agt.utils.rx.SchedulerProvider

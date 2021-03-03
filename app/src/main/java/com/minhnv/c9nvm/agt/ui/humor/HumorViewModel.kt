@@ -1,11 +1,11 @@
 package com.minhnv.c9nvm.agt.ui.humor
 
-import androidx.lifecycle.ViewModel
 import com.minhnv.c9nvm.agt.data.model.Humor
 import com.minhnv.c9nvm.agt.ui.base.BaseViewModel
 import com.minhnv.c9nvm.agt.utils.AGTConstant
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import java.util.concurrent.TimeUnit
 
 class HumorViewModel : BaseViewModel() {
 
@@ -32,7 +32,7 @@ class HumorViewModel : BaseViewModel() {
         Observable.merge(refresh, loadMore)
             .switchMap {
                 doLoadListHumor(page)
-            }.subscribe ({
+            }.delay(2000, TimeUnit.MILLISECONDS).subscribe ({
                 mHumors.onNext(it as MutableList<Humor>)
             }, {
 

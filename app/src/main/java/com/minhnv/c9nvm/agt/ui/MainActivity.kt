@@ -1,8 +1,6 @@
 package com.minhnv.c9nvm.agt.ui
 
 import android.view.LayoutInflater
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import com.minhnv.c9nvm.agt.R
 import com.minhnv.c9nvm.agt.databinding.ActivityMainBinding
 import com.minhnv.c9nvm.agt.ui.base.BaseActivity
@@ -20,7 +18,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     override fun initView() {
         mainPagerAdapter = MainPagerAdapter(this)
         binding.vpMain.adapter = mainPagerAdapter
-
+        binding.vpMain.isUserInputEnabled = false
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> {

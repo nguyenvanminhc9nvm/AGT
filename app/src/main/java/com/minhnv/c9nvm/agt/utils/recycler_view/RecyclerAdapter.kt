@@ -11,8 +11,7 @@ import com.minhnv.c9nvm.agt.R
 
 abstract class RecyclerAdapter<T>(
     context: Context, private val onItemClick: ((T) -> Unit)? = null
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val loadMore = 1
     private val normal = 0

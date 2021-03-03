@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -10,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.minhnv.c9nvm.agt"
-        minSdkVersion 16
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -23,19 +24,7 @@ android {
 
     productFlavors {
         Prod {
-            buildConfigField 'String', 'API_HOST', '"https://kajiken-app.biz/api/v1"'
-            dimension "notSet"
-            manifestPlaceholders = [usesCleartextTraffic: "false"]
-            signingConfig signingConfigs.debug
-        }
-        Staging {
-            buildConfigField 'String', 'API_HOST', '"https://ik1-423-43847.vs.sakura.ne.jp/api/v1"'
-            dimension "notSet"
-            manifestPlaceholders = [usesCleartextTraffic: "false"]
-            signingConfig signingConfigs.debug
-        }
-        Dev {
-            buildConfigField 'String', 'API_HOST', '"http://192.168.1.100:6969/api/v1"'
+            buildConfigField 'String', 'API_HOST', '"http://192.168.64.2/NewAppGiaiTri"'
             dimension "notSet"
             manifestPlaceholders = [usesCleartextTraffic: "false"]
             signingConfig signingConfigs.debug
@@ -123,5 +112,8 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
 }

@@ -7,16 +7,6 @@
     tools:context=".ui.comic.ComicFragment"
     android:background="@color/black">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/color_29"
-        android:text="@string/humor" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rycHumor"
-        android:layout_marginHorizontal="9dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
 </LinearLayout>

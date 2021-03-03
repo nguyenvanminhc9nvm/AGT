@@ -9,7 +9,6 @@ import com.minhnv.c9nvm.agt.ui.comic.ComicViewModel
 import com.minhnv.c9nvm.agt.ui.humor.HumorViewModel
 import com.minhnv.c9nvm.agt.ui.sport.SportViewModel
 import com.minhnv.c9nvm.agt.utils.rx.SchedulerProvider
-import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Singleton
 

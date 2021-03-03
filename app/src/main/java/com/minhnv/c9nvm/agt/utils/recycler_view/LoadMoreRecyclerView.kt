@@ -103,7 +103,7 @@ class LoadMoreRecyclerView @JvmOverloads constructor(
     }
 
 
-    fun checkEndOfPage(list: List<Any>, limit: Int = 20) {
+    fun checkEndOfPage(list: List<Any>, limit: Int = 3) {
         endOfPage = list.count() < limit
     }
 
