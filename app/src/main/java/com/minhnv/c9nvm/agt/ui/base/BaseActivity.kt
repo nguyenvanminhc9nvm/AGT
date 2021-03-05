@@ -18,7 +18,7 @@ import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 
-abstract class BaseActivity<V: BaseViewModel, VB: ViewBinding> : DaggerAppCompatActivity(), ActivityController {
+abstract class BaseActivity<V: BaseViewModel, VB: ViewBinding> : DaggerAppCompatActivity() {
     @Inject
     lateinit var schedulerProvider: SchedulerProvider
 

@@ -7,8 +7,8 @@ import com.minhnv.c9nvm.agt.ui.comic.ComicFragment
 import com.minhnv.c9nvm.agt.ui.humor.HumorFragment
 import com.minhnv.c9nvm.agt.ui.sport.SportFragment
 
-class MainPagerAdapter(fragmentActivity: FragmentActivity) :
-    FragmentStateAdapter(fragmentActivity) {
+class MainPagerAdapter(fragment: Fragment) :
+    FragmentStateAdapter(fragment) {
     override fun getItemCount(): Int {
         return 3
     }
