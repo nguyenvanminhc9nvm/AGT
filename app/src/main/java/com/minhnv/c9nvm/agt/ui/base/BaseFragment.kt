@@ -58,7 +58,7 @@ abstract class BaseFragment<V: BaseViewModel, VB: ViewBinding> : DaggerFragment(
         super.onAttach(context)
         if (context is BaseActivity<*, *>) {
             mActivity = context
-            activityController = context
+            activityController = context as ActivityController
         }
     }
 

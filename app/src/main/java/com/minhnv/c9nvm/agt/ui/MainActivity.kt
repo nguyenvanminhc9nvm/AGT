@@ -1,12 +1,16 @@
 package com.minhnv.c9nvm.agt.ui
 
 import android.view.LayoutInflater
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.minhnv.c9nvm.agt.R
 import com.minhnv.c9nvm.agt.databinding.ActivityMainBinding
+import com.minhnv.c9nvm.agt.ui.base.ActivityController
 import com.minhnv.c9nvm.agt.ui.base.BaseActivity
 
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
-    private lateinit var mainPagerAdapter: MainPagerAdapter
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), ActivityController {
+
+    private lateinit var navController: NavController
 
     override val bindingInflater: (LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
@@ -16,29 +20,18 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
     }
 
     override fun initView() {
-        mainPagerAdapter = MainPagerAdapter(this)
-        binding.vpMain.adapter = mainPagerAdapter
-        binding.vpMain.isUserInputEnabled = false
-        binding.bottomNavigationView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.navigation_home -> {
-                    binding.vpMain.currentItem = 0
-                }
-                R.id.navigation_dashboard -> {
-                    binding.vpMain.currentItem = 1
-                }
-                R.id.navigation_notifications -> {
-                    binding.vpMain.currentItem = 2
-                }
-            }
-            true
-        }
+
     }
 
     override fun bindViewModel() {
-
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.navHostFragment) as NavHostFragment
+        navController = navHostFragment.navController
     }
 
+    override fun switchFragment(fragmentId: Int) {
+        navController.navigate(fragmentId)
+    }
 
 
 }

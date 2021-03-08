@@ -2,6 +2,7 @@ package com.minhnv.c9nvm.agt.di.builder
 
 import com.minhnv.c9nvm.agt.ui.comic.ComicFragment
 import com.minhnv.c9nvm.agt.ui.humor.HumorFragment
+import com.minhnv.c9nvm.agt.ui.main.AGTMainFragment
 import com.minhnv.c9nvm.agt.ui.sport.SportFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -17,5 +18,8 @@ abstract class MainFragmentModule {
 
     @ContributesAndroidInjector
     abstract fun sportFragment(): SportFragment
+
+    @ContributesAndroidInjector
+    abstract fun agtFragment(): AGTMainFragment
 
 }
