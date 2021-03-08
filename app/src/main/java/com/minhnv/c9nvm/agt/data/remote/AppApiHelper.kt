@@ -1,5 +1,6 @@
 package com.minhnv.c9nvm.agt.data.remote
 
+import com.minhnv.c9nvm.agt.data.model.Comic
 import com.minhnv.c9nvm.agt.data.model.Humor
 import com.rx2androidnetworking.Rx2AndroidNetworking
 import io.reactivex.Observable
@@ -13,5 +14,12 @@ class AppApiHelper @Inject constructor() : ApiHelper {
             .addPathParameter("page", page.toString())
             .build()
             .getObjectListObservable(Humor::class.java)
+    }
+
+    override fun getListComic(page: Int): Observable<List<Comic>> {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_COMIC)
+            .addPathParameter("page", page.toString())
+            .build()
+            .getObjectListObservable(Comic::class.java)
     }
 }

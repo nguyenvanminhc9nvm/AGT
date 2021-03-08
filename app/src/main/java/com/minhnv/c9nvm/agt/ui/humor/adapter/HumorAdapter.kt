@@ -5,6 +5,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.minhnv.c9nvm.agt.R
 import com.minhnv.c9nvm.agt.data.model.Humor
+import com.minhnv.c9nvm.agt.utils.AGTConstant
 import com.minhnv.c9nvm.agt.utils.options.loadImage
 import com.minhnv.c9nvm.agt.utils.recycler_view.RecyclerAdapter
 import kotlinx.android.synthetic.main.item_humor.view.*
@@ -15,7 +16,7 @@ class HumorAdapter(private val context: Context) : RecyclerAdapter<Humor>(contex
 
     inner class HumorViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         fun bind(humor: Humor) {
-            itemView.circleImageView.loadImage(humor.imageUrl)
+            itemView.circleImageView.loadImage(AGTConstant.PATH_HUMOR, humor.imageUrl)
             itemView.tvDescription.text = humor.content
             itemView.tvTime.text = String.format("${context.getText(R.string.time_post)} ${humor.create_at}")
             itemView.tvTitle.text = humor.title

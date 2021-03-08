@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.minhnv.c9nvm.agt.R
 
-fun ImageView.loadImage(urlImage: String?) {
-    Glide.with(this).load(urlImage).placeholder(R.drawable.ic_launcher_background)
+fun ImageView.loadImage(basePath: String, urlImage: String?) {
+    Glide.with(this).load(basePath + urlImage).placeholder(R.drawable.ic_launcher_background)
         .error(R.drawable.ic_launcher_background).into(this)
 }
 

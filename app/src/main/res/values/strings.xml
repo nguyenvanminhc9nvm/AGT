@@ -6,4 +6,5 @@
     <string name="no_value">empty</string>
     <string name="humor">Humor</string>
     <string name="time_post">Last post: </string>
+    <string name="comic">Comic</string>
 </resources>
