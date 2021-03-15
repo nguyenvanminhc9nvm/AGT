@@ -10,7 +10,10 @@ import com.minhnv.c9nvm.agt.utils.options.loadImage
 import com.minhnv.c9nvm.agt.utils.recycler_view.RecyclerAdapter
 import kotlinx.android.synthetic.main.item_comic.view.*
 
-class ComicAdapter(private val context: Context) : RecyclerAdapter<Comic>(context) {
+class ComicAdapter(
+    private val context: Context,
+    onItemClick: (Comic) -> Unit
+) : RecyclerAdapter<Comic>(context, onItemClick) {
     override var layoutResource: Int = R.layout.item_comic
 
     override fun createViewHolder(view: View): RecyclerView.ViewHolder {
@@ -27,7 +30,8 @@ class ComicAdapter(private val context: Context) : RecyclerAdapter<Comic>(contex
         fun bind(comic: Comic) {
             itemView.imgComic.loadImage(AGTConstant.PATH_COMIC, comic.comicImage)
             itemView.tvNameComic.text = comic.nameComic
-            itemView.tvCreateAt.text = String.format("${context.getText(R.string.time_post)} ${comic.createAt}")
+            itemView.tvCreateAt.text =
+                String.format("${context.getText(R.string.time_post)} ${comic.createAt}")
         }
     }
 }

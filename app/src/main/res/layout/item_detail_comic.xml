@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imgDetailComic"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_120sdp"
         android:layout_marginVertical="10dp"
@@ -16,27 +16,29 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvTitleComic"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:text="TextView"
         android:textStyle="bold"
         android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/imgDetailComic"
+        app:layout_constraintTop_toTopOf="@+id/imgDetailComic" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvDescriptionComic"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:text="TextView"
+        android:textColor="@color/white"
         android:layout_marginBottom="@dimen/_5sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/imgDetailComic"
+        app:layout_constraintEnd_toEndOf="@+id/tvTitleComic"
+        app:layout_constraintStart_toStartOf="@+id/tvTitleComic"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleComic" />
 
     <View
         android:layout_width="0dp"
@@ -45,5 +47,5 @@
         android:background="@android:color/darker_gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/textView2" />
+        app:layout_constraintStart_toStartOf="@id/tvDescriptionComic" />
 </androidx.constraintlayout.widget.ConstraintLayout>

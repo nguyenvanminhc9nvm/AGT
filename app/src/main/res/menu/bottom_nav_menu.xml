@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/humor"
         android:icon="@drawable/ic_baseline_sentiment_very_satisfied_24"
         android:title="@string/title_home"
         android:iconTint="@color/purple_200"
         />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/comic"
         android:icon="@drawable/ic_baseline_dashboard_24"
         android:title="@string/title_dashboard"
         android:iconTint="#4CAF50"/>
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/sport"
         android:icon="@drawable/ic_baseline_sports_soccer_24"
         android:title="@string/title_notifications"
         android:iconTint="#E91E63"/>

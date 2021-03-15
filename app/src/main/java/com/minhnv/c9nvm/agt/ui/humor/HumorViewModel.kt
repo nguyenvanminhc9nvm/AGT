@@ -2,14 +2,12 @@ package com.minhnv.c9nvm.agt.ui.humor
 
 import com.minhnv.c9nvm.agt.data.model.Humor
 import com.minhnv.c9nvm.agt.ui.base.BaseViewModel
-import com.minhnv.c9nvm.agt.utils.AGTConstant
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.TimeUnit
 
 class HumorViewModel : BaseViewModel() {
 
-    var page = AGTConstant.PAGE
+    var page = 0
 
     data class Input(
         val triggerRefresh: Observable<Boolean>,
@@ -32,7 +30,7 @@ class HumorViewModel : BaseViewModel() {
         Observable.merge(refresh, loadMore)
             .switchMap {
                 doLoadListHumor(page)
-            }.delay(2000, TimeUnit.MILLISECONDS).subscribe ({
+            }.subscribe({
                 mHumors.onNext(it as MutableList<Humor>)
             }, {
 

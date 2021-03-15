@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import androidx.viewbinding.ViewBinding
@@ -18,7 +17,7 @@ import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 
-abstract class BaseActivity<V: BaseViewModel, VB: ViewBinding> : DaggerAppCompatActivity() {
+abstract class BaseActivity<V : BaseViewModel, VB : ViewBinding> : DaggerAppCompatActivity() {
     @Inject
     lateinit var schedulerProvider: SchedulerProvider
 
@@ -38,31 +37,25 @@ abstract class BaseActivity<V: BaseViewModel, VB: ViewBinding> : DaggerAppCompat
 
     abstract fun bindViewModel()
 
-    private var _binding: ViewBinding ? = null
-    abstract val bindingInflater: (LayoutInflater) -> VB
-
-    @Suppress("UNCHECKED_CAST")
-    protected val binding : VB
-        get() = _binding as VB
+    abstract fun getContentView(): Int
 
     private lateinit var mProgressDialog: ProgressDialog
 
-    fun Disposable.addToDisposable() {
+    private fun Disposable.addToDisposable() {
         compositeDisposable.add(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(getContentView())
         mProgressDialog = ProgressDialog(this)
         viewModel = viewModelFactory.create(createViewModel())
-        _binding = bindingInflater.invoke(layoutInflater)
-        setContentView(_binding?.root)
         initView()
         bindLoading()
         bindViewModel()
     }
 
-    private fun bindLoading(){
+    private fun bindLoading() {
         viewModel.mProgressBar.subscribeOn(schedulerProvider.ui).subscribe {
             if (it) {
                 showLoading()
@@ -76,26 +69,25 @@ abstract class BaseActivity<V: BaseViewModel, VB: ViewBinding> : DaggerAppCompat
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
-        _binding = null
     }
 
     fun hideSoftKeyboard() {
         currentFocus?.let {
             val inputMethodManager =
-                    getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 
 
     private fun showLoading() {
-        if (!mProgressDialog.isShowing ) {
+        if (!mProgressDialog.isShowing) {
             mProgressDialog.show()
         }
     }
 
     private fun hideLoading() {
-        if (mProgressDialog.isShowing ) {
+        if (mProgressDialog.isShowing) {
             mProgressDialog.dismiss()
         }
     }
@@ -111,6 +103,4 @@ abstract class BaseActivity<V: BaseViewModel, VB: ViewBinding> : DaggerAppCompat
             }
         }
     }
-
-
 }

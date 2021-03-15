@@ -6,7 +6,6 @@ import com.minhnv.c9nvm.agt.utils.AGTConstant
 import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.TimeUnit
 
 class ComicViewModel : BaseViewModel() {
 
@@ -36,10 +35,10 @@ class ComicViewModel : BaseViewModel() {
         Observable.merge(refresh, loadMore)
             .switchMap {
                 doLoadListComic(page)
-            }.delay(2000, TimeUnit.MILLISECONDS).subscribe({
+            }.subscribe({
                 mComics.onNext(it as MutableList<Comic>)
             }, {
-                mError.onNext(it.message ?:"")
+                mError.onNext(it.message ?: "")
             }).addToDisposable()
         return Output(mComics, mError)
     }

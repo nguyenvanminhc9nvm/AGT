@@ -6,7 +6,7 @@ import com.minhnv.c9nvm.agt.databinding.SportFragmentBinding
 import com.minhnv.c9nvm.agt.ui.base.BaseFragment
 
 class SportFragment : BaseFragment<SportViewModel, SportFragmentBinding>() {
-    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> SportFragmentBinding
+    override val sbindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> SportFragmentBinding
         get() = SportFragmentBinding::inflate
 
     override fun createViewModel(): Class<SportViewModel> {

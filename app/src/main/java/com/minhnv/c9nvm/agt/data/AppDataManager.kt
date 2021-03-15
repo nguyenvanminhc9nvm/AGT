@@ -1,6 +1,8 @@
 package com.minhnv.c9nvm.agt.data
 
 import com.minhnv.c9nvm.agt.data.model.Comic
+import com.minhnv.c9nvm.agt.data.model.DescriptionComic
+import com.minhnv.c9nvm.agt.data.model.DetailComic
 import com.minhnv.c9nvm.agt.data.model.Humor
 import com.minhnv.c9nvm.agt.data.remote.ApiHelper
 import io.reactivex.Observable
@@ -17,5 +19,15 @@ class AppDataManager @Inject constructor(
 
     override fun getListComic(page: Int): Observable<List<Comic>> {
         return apiHelper.getListComic(page)
+    }
+
+    override fun getListDetailComic(page: Int, comicId: Int): Observable<List<DetailComic>> {
+        return apiHelper.getListDetailComic(page, comicId)
+    }
+
+    override fun getListDescriptionComic(
+        comicId: Int
+    ): Observable<List<DescriptionComic>> {
+        return apiHelper.getListDescriptionComic(comicId)
     }
 }

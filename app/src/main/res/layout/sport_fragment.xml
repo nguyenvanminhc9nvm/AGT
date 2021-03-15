@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.sport.SportFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/edt"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Hello" />

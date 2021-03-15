@@ -1,7 +1,6 @@
 package com.minhnv.c9nvm.agt.ui
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.minhnv.c9nvm.agt.ui.comic.ComicFragment
 import com.minhnv.c9nvm.agt.ui.humor.HumorFragment

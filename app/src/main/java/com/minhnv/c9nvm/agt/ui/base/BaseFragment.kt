@@ -15,7 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-abstract class BaseFragment<V: BaseViewModel, VB: ViewBinding> : DaggerFragment() {
+abstract class BaseFragment<V : BaseViewModel, VB : ViewBinding> : DaggerFragment() {
 
     lateinit var mActivity: Activity
 
@@ -35,7 +35,7 @@ abstract class BaseFragment<V: BaseViewModel, VB: ViewBinding> : DaggerFragment(
     lateinit var viewModel: V
 
     private var _binding: ViewBinding? = null
-    abstract val bindingInflater: (LayoutInflater, ViewGroup?, Boolean ) -> VB
+    abstract val sbindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> VB
 
     abstract fun createViewModel(): Class<V>
 
@@ -56,9 +56,11 @@ abstract class BaseFragment<V: BaseViewModel, VB: ViewBinding> : DaggerFragment(
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is BaseActivity<*, *>) {
-            mActivity = context
-            activityController = context as ActivityController
+        if (context is ActivityController) {
+            mActivity = context as Activity
+            activityController = context
+            viewModel = viewModelFactory.create(createViewModel())
+            mProgressDialog = BaseActivity.ProgressDialog(mActivity)
         }
     }
 
@@ -67,21 +69,20 @@ abstract class BaseFragment<V: BaseViewModel, VB: ViewBinding> : DaggerFragment(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = bindingInflater.invoke(inflater, container, false)
+        _binding = sbindingInflater.invoke(inflater, container, false)
         return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = viewModelFactory.create(createViewModel())
-        mProgressDialog = BaseActivity.ProgressDialog(mActivity)
+
         initView()
         bindLoading()
         bindViewModel()
     }
 
 
-    private fun bindLoading(){
+    private fun bindLoading() {
         viewModel.mProgressBar.subscribeOn(schedulerProvider.ui).subscribe {
             if (it) {
                 showLoading()
@@ -99,16 +100,14 @@ abstract class BaseFragment<V: BaseViewModel, VB: ViewBinding> : DaggerFragment(
 
 
     private fun showLoading() {
-        if (!mProgressDialog.isShowing ) {
+        if (!mProgressDialog.isShowing) {
             mProgressDialog.show()
         }
     }
 
     private fun hideLoading() {
-        if (mProgressDialog.isShowing ) {
+        if (mProgressDialog.isShowing) {
             mProgressDialog.dismiss()
         }
     }
-
-
 }

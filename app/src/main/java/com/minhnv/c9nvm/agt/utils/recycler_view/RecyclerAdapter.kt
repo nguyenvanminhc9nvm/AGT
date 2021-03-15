@@ -50,7 +50,6 @@ abstract class RecyclerAdapter<T>(
         }
     }
 
-
     /**
      * call when API failure
      */
