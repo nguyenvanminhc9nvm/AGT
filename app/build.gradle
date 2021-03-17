@@ -24,7 +24,7 @@ android {
 
     productFlavors {
         Prod {
-            buildConfigField 'String', 'API_HOST', '"http://192.168.64.2/NewAppGiaiTri"'
+            buildConfigField 'String', 'API_HOST', '"http://192.168.64.2/NewAppGiaiTri/"'
             dimension "notSet"
             manifestPlaceholders = [usesCleartextTraffic: "false"]
             signingConfig signingConfigs.debug
@@ -60,6 +60,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+    dataBinding {
+        enabled = true
+    }
+
 }
 
 dependencies {
@@ -77,6 +81,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.android.gms:play-services-ads:19.7.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -114,5 +119,17 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    implementation 'com.google.android.gms:play-services-ads:19.7.0'
+
+    def paging_version = "3.0.0-alpha04"
+
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+
 
 }

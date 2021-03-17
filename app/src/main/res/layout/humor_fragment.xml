@@ -22,10 +22,10 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <com.minhnv.c9nvm.agt.utils.recycler_view.LoadMoreRecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rycHumor"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="9dp" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

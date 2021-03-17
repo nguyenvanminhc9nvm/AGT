@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="color_29">#292929</color>
+    <color name="color_win">#b00020</color>
+    <color name="color_lose">#03da6c</color>
 </resources>

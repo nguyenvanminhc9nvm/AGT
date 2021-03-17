@@ -162,8 +162,6 @@ abstract class RecyclerAdapter<T>(
     fun getItem(position: Int): T {
         return mList[position]!!
     }
-
-
 }
 
 class LoadingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

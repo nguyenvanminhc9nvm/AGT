@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.viewbinding.ViewBinding
 import com.minhnv.c9nvm.agt.ViewModelProviderFactory
 import com.minhnv.c9nvm.agt.data.DataManager
@@ -108,6 +109,14 @@ abstract class BaseFragment<V : BaseViewModel, VB : ViewBinding> : DaggerFragmen
     private fun hideLoading() {
         if (mProgressDialog.isShowing) {
             mProgressDialog.dismiss()
+        }
+    }
+
+    fun hideSoftKeyboard() {
+        mActivity.currentFocus?.let {
+            val inputMethodManager =
+                mActivity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
 }

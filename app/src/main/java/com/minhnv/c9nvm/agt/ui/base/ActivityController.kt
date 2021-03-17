@@ -5,7 +5,6 @@ import android.os.Bundle
 interface ActivityController {
     fun switchFragment(
         fragmentId: BaseFragment<*, *>,
-        bundle: Bundle? = null,
-        isAdd: Boolean = false
+        bundle: Bundle? = null
     )
 }

@@ -1,51 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_5sdp"
+    app:cardBackgroundColor="@color/color_29"
+    app:cardCornerRadius="@dimen/_8sdp"
+    app:cardElevation="@dimen/_5sdp">
 
-    <ImageView
-        android:id="@+id/imgDetailComic"
-        android:layout_width="@dimen/_100sdp"
-        android:layout_height="@dimen/_120sdp"
-        android:layout_marginVertical="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tvTitleComic"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_10sdp"
-        android:text="TextView"
-        android:textStyle="bold"
-        android:textSize="@dimen/_12sdp"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imgDetailComic"
-        app:layout_constraintTop_toTopOf="@+id/imgDetailComic" />
+        <ImageView
+            android:id="@+id/imgDetailComic"
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_120sdp"
+            android:layout_marginVertical="10dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <TextView
-        android:id="@+id/tvDescriptionComic"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="TextView"
-        android:textColor="@color/white"
-        android:layout_marginBottom="@dimen/_5sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/imgDetailComic"
-        app:layout_constraintEnd_toEndOf="@+id/tvTitleComic"
-        app:layout_constraintStart_toStartOf="@+id/tvTitleComic"
-        app:layout_constraintTop_toBottomOf="@+id/tvTitleComic" />
+        <TextView
+            android:id="@+id/tvTitleComic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:text="TextView"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgDetailComic"
+            app:layout_constraintTop_toTopOf="@+id/imgDetailComic" />
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0.5dp"
-        android:layout_marginRight="@dimen/_5sdp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tvDescriptionComic" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tvDescriptionComic"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:text="TextView"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/imgDetailComic"
+            app:layout_constraintEnd_toEndOf="@+id/tvTitleComic"
+            app:layout_constraintStart_toStartOf="@+id/tvTitleComic"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleComic" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

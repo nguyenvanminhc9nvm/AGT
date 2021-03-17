@@ -2,19 +2,19 @@ package com.minhnv.c9nvm.agt.ui.humor
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.minhnv.c9nvm.agt.databinding.HumorFragmentBinding
 import com.minhnv.c9nvm.agt.ui.base.BaseFragment
 import com.minhnv.c9nvm.agt.ui.humor.adapter.HumorAdapter
 import com.minhnv.c9nvm.agt.utils.options.SpaceLastItemDecorations
-import com.minhnv.c9nvm.agt.utils.recycler_view.PageIndicator
-import io.reactivex.subjects.BehaviorSubject
-import kotlinx.android.synthetic.main.humor_fragment.*
+import com.minhnv.c9nvm.agt.utils.recycler_view.FooterAdapter
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class HumorFragment : BaseFragment<HumorViewModel, HumorFragmentBinding>(), PageIndicator {
+class HumorFragment : BaseFragment<HumorViewModel, HumorFragmentBinding>() {
     private lateinit var humorAdapter: HumorAdapter
-    override var triggerLoadMore: BehaviorSubject<Boolean> = BehaviorSubject.create()
-    override var triggerRefresh: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
     override val sbindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> HumorFragmentBinding
         get() = HumorFragmentBinding::inflate
@@ -25,25 +25,26 @@ class HumorFragment : BaseFragment<HumorViewModel, HumorFragmentBinding>(), Page
 
     override fun initView() {
         humorAdapter = HumorAdapter(mActivity)
-
-        val output = viewModel.transform(
-            HumorViewModel.Input(
-                triggerRefresh, triggerLoadMore
-            )
-        )
-        output.humors.observeOn(schedulerProvider.ui).subscribe {
-            humorAdapter.updateList(it)
-            binding.rycHumor.checkEndOfPage(it)
-        }.addToDisposable()
-    }
-
-    override fun bindViewModel() {
+        humorAdapter.withLoadStateFooter(footer = FooterAdapter())
         with(binding.rycHumor) {
-            layoutManager = LinearLayoutManager(mActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(mActivity)
             setHasFixedSize(true)
             adapter = humorAdapter
             addItemDecoration(SpaceLastItemDecorations())
-            initLoadMore(binding.swHumor, this@HumorFragment)
+        }
+        binding.swHumor.setOnRefreshListener {
+            humorAdapter.refresh()
+        }
+        humorAdapter.addLoadStateListener {
+            binding.swHumor.isRefreshing = it.source.refresh is LoadState.Loading
+        }
+    }
+
+    override fun bindViewModel() {
+        lifecycleScope.launch {
+            viewModel.listHumors.collect {
+                humorAdapter.submitData(it)
+            }
         }
     }
 }

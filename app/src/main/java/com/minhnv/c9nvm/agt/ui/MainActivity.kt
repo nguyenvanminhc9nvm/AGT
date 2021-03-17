@@ -27,17 +27,12 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Activit
 
     }
 
-    override fun switchFragment(fragmentId: BaseFragment<*, *>, bundle: Bundle?, isAdd: Boolean) {
-        val fragmentManager = supportFragmentManager.beginTransaction()
+    override fun switchFragment(fragmentId: BaseFragment<*, *>, bundle: Bundle?) {
         fragmentId.arguments = bundle
-        if (isAdd) {
-            fragmentManager.addToBackStack(fragmentId.tag)
-                .add(R.id.nav_host_fragment, fragmentId)
-                .commit()
-        } else {
-            fragmentManager.addToBackStack(fragmentId.tag)
-                .replace(R.id.nav_host_fragment, fragmentId)
-                .commit()
-        }
+        supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(fragmentId.tag)
+            .add(R.id.nav_host_fragment, fragmentId)
+            .commit()
     }
 }

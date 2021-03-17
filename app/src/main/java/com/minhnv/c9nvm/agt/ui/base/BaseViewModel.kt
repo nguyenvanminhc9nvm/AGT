@@ -14,7 +14,7 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var mScheduler: SchedulerProvider
 
 
-    private val mCompositeDisposable: CompositeDisposable by lazy {
+    val mCompositeDisposable: CompositeDisposable by lazy {
         CompositeDisposable()
     }
 

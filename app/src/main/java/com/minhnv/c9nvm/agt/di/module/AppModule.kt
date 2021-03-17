@@ -5,7 +5,7 @@ import com.minhnv.c9nvm.agt.data.AppDataManager
 import com.minhnv.c9nvm.agt.data.DataManager
 import com.minhnv.c9nvm.agt.data.local.AppDataStoreHelper
 import com.minhnv.c9nvm.agt.data.local.DataStoreHelper
-import com.minhnv.c9nvm.agt.data.remote.ApiHelper
+import com.minhnv.c9nvm.agt.data.remote.ApiService
 import com.minhnv.c9nvm.agt.data.remote.AppApiHelper
 import com.minhnv.c9nvm.agt.utils.rx.AppSchedulerProvider
 import com.minhnv.c9nvm.agt.utils.rx.SchedulerProvider
@@ -18,7 +18,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providerAppApiHelper(): ApiHelper {
+    fun providerAppApiHelper(): ApiService {
         return AppApiHelper()
     }
 
@@ -35,7 +35,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providerDataManager(apiHelper: ApiHelper): DataManager {
+    fun providerDataManager(apiHelper: ApiService): DataManager {
         return AppDataManager(apiHelper)
     }
 
