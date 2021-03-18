@@ -9,11 +9,13 @@
     tools:context=".ui.humor.HumorFragment">
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarHumor"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/color_29"
         android:text="@string/humor"
         app:title="@string/humor"
+        app:navigationIcon="@drawable/ic_baseline_menu_24"
         app:titleTextColor="@color/white" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

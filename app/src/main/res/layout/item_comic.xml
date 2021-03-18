@@ -32,31 +32,32 @@
 
             <TextView
                 android:id="@+id/tvNameComic"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="@{model.nameComic}"
+                android:textColor="@color/white"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.05"
                 app:layout_constraintStart_toStartOf="@id/imgComic"
                 app:layout_constraintTop_toBottomOf="@id/imgComic" />
 
             <TextView
                 android:id="@+id/tvCreateAt"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/_5sdp"
+                android:maxLines="1"
                 android:text="@{@string/time_post + model.createAt}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10sdp"
-                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/tvNameComic"
                 app:layout_constraintTop_toBottomOf="@id/tvNameComic" />
 

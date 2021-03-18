@@ -21,6 +21,4 @@ interface AppComponent: AndroidInjector<AGTApplication> {
 
         fun build(): AppComponent
     }
-
-
 }

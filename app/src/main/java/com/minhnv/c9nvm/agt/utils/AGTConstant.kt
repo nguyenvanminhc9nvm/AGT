@@ -1,5 +1,9 @@
 package com.minhnv.c9nvm.agt.utils
 
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import com.minhnv.c9nvm.agt.BuildConfig
 
 object AGTConstant {
@@ -10,5 +14,9 @@ object AGTConstant {
     const val PATH_DESCRIPTION_COMIC = "${BuildConfig.API_HOST}uploads/comic/image/detail/description/"
     const val PATH_SCORE_CLUB = "${BuildConfig.API_HOST}uploads/sport/"
     const val COMIC_ID = "COMIC_ID"
+    const val COMIC_NAME = "COMIC_NAME"
     const val DESCRIPTION_ID = "DESCRIPTION_ID"
+    const val STATE_LIST = "STATE_LIST"
 }
+
+val Context.dataStore : DataStore<Preferences> by preferencesDataStore("preferencesKey")

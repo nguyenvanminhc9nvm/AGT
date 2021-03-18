@@ -10,6 +10,7 @@ import com.minhnv.c9nvm.agt.ui.comic.detail.ComicDetailViewModel
 import com.minhnv.c9nvm.agt.ui.comic.detail.description.ComicDescriptionViewModel
 import com.minhnv.c9nvm.agt.ui.humor.HumorViewModel
 import com.minhnv.c9nvm.agt.ui.main.AGTViewModel
+import com.minhnv.c9nvm.agt.ui.menu.MenuViewModel
 import com.minhnv.c9nvm.agt.ui.sport.SportViewModel
 import com.minhnv.c9nvm.agt.utils.rx.SchedulerProvider
 import javax.inject.Inject
@@ -30,6 +31,7 @@ class ViewModelProviderFactory @Inject constructor(
             modelClass.isAssignableFrom(ComicDetailViewModel::class.java) -> ComicDetailViewModel() as T
             modelClass.isAssignableFrom(AGTViewModel::class.java) -> AGTViewModel() as T
             modelClass.isAssignableFrom(ComicDescriptionViewModel::class.java) -> ComicDescriptionViewModel() as T
+            modelClass.isAssignableFrom(MenuViewModel::class.java) -> MenuViewModel() as T
             else -> throw Exception("no viewModel")
         }
 

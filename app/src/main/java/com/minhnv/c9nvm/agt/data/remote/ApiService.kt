@@ -30,7 +30,17 @@ interface ApiService {
     suspend fun getListScore(): Response<List<Score>>
 
     @GET(ApiEndPoint.ENDPOINT_FIND_COMIC)
-    suspend fun findListComic(@Query("name") name: String): Response<List<Comic>>
+    suspend fun findListComic(
+        @Query("name") name: String,
+        @Query("page") page: Int
+    ): Response<List<Comic>>
+
+    @GET(ApiEndPoint.ENDPOINT_FIND_DETAIL_COMIC)
+    suspend fun findListDetailComic(
+        @Query("page") page: Int,
+        @Query("name") name: String,
+        @Query("comicId") comicId: Int
+    ): Response<List<DetailComic>>
 
     companion object {
         fun getApiService(): ApiService = Retrofit.Builder()

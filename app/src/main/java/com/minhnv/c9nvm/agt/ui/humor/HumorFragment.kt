@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.minhnv.c9nvm.agt.databinding.HumorFragmentBinding
 import com.minhnv.c9nvm.agt.ui.base.BaseFragment
 import com.minhnv.c9nvm.agt.ui.humor.adapter.HumorAdapter
+import com.minhnv.c9nvm.agt.ui.menu.MenuFragment
 import com.minhnv.c9nvm.agt.utils.options.SpaceLastItemDecorations
 import com.minhnv.c9nvm.agt.utils.recycler_view.FooterAdapter
 import kotlinx.coroutines.flow.collect
@@ -37,6 +38,9 @@ class HumorFragment : BaseFragment<HumorViewModel, HumorFragmentBinding>() {
         }
         humorAdapter.addLoadStateListener {
             binding.swHumor.isRefreshing = it.source.refresh is LoadState.Loading
+        }
+        binding.toolbarHumor.setOnClickListener {
+            activityController.switchFragment(MenuFragment())
         }
     }
 

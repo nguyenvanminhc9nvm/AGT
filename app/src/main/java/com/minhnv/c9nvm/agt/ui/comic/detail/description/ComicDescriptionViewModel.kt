@@ -4,6 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.minhnv.c9nvm.agt.data.model.DescriptionComic
 import com.minhnv.c9nvm.agt.ui.base.BaseViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class ComicDescriptionViewModel : BaseViewModel() {
@@ -19,4 +21,15 @@ class ComicDescriptionViewModel : BaseViewModel() {
             }
         }
     }
+
+    private val _currentPage = MutableStateFlow(0)
+    val currentPage : StateFlow<Int> get() = _currentPage
+
+    private val _listTimeSkip = MutableStateFlow(arrayOf(
+        "10 second",
+        "20 second",
+        "30 second"
+    ))
+    val listTimeSkip get() = _listTimeSkip
+
 }

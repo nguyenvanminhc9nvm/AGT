@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.minhnv.c9nvm.agt.ViewModelProviderFactory
 import com.minhnv.c9nvm.agt.data.DataManager
@@ -44,6 +45,10 @@ abstract class BaseFragment<V : BaseViewModel, VB : ViewBinding> : DaggerFragmen
 
     abstract fun bindViewModel()
 
+
+
+    private val gridLayoutManager = GridLayoutManager(context, 2)
+
     private lateinit var mProgressDialog: BaseActivity.ProgressDialog
 
     @Suppress("UNCHECKED_CAST")
@@ -76,7 +81,6 @@ abstract class BaseFragment<V : BaseViewModel, VB : ViewBinding> : DaggerFragmen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
         bindLoading()
         bindViewModel()
@@ -119,4 +123,5 @@ abstract class BaseFragment<V : BaseViewModel, VB : ViewBinding> : DaggerFragmen
             inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
         }
     }
+
 }

@@ -1,6 +1,7 @@
 package com.minhnv.c9nvm.agt.ui
 
 import android.os.Bundle
+import com.google.android.gms.ads.MobileAds
 import com.minhnv.c9nvm.agt.R
 import com.minhnv.c9nvm.agt.databinding.ActivityMainBinding
 import com.minhnv.c9nvm.agt.ui.base.ActivityController
@@ -19,6 +20,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Activit
     }
 
     override fun initView() {
+        MobileAds.initialize(this)
         supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, AGTFragment())
             .commit()
     }
@@ -32,7 +34,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Activit
         supportFragmentManager
             .beginTransaction()
             .addToBackStack(fragmentId.tag)
-            .add(R.id.nav_host_fragment, fragmentId)
+            .setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            .replace(R.id.nav_host_fragment, fragmentId)
             .commit()
     }
 }

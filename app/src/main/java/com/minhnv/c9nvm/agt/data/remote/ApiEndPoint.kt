@@ -9,4 +9,5 @@ object ApiEndPoint {
         "api/getDescriptionComic.php"
     const val ENDPOINT_SCORE = "api/getListScore.php"
     const val ENDPOINT_FIND_COMIC = "api/findListComic.php"
+    const val ENDPOINT_FIND_DETAIL_COMIC = "api/findListDetailComic.php"
 }

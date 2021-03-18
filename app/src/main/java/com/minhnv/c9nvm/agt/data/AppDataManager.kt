@@ -1,15 +1,27 @@
 package com.minhnv.c9nvm.agt.data
 
+import com.minhnv.c9nvm.agt.data.local.DataStoreHelper
 import com.minhnv.c9nvm.agt.data.model.*
 import com.minhnv.c9nvm.agt.data.remote.ApiService
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AppDataManager @Inject constructor(
-    private val apiHelper: ApiService
+    private val apiHelper: ApiService,
+    private val dataStoreHelper: DataStoreHelper
 ): DataManager {
+
+    override suspend fun savePage(page: Int) {
+        return dataStoreHelper.savePage(page)
+    }
+
+    override fun getPage(): Flow<Int> {
+        return dataStoreHelper.getPage()
+    }
+
     override suspend fun getListHumor(page: Int): Response<List<Humor>> {
         return apiHelper.getListHumor(page)
     }
@@ -32,8 +44,16 @@ class AppDataManager @Inject constructor(
         return apiHelper.getListScore()
     }
 
-    override suspend fun findListComic(name: String): Response<List<Comic>> {
-        return apiHelper.findListComic(name)
+    override suspend fun findListComic(name: String, page: Int): Response<List<Comic>> {
+        return apiHelper.findListComic(name, page)
+    }
+
+    override suspend fun findListDetailComic(
+        page: Int,
+        name: String,
+        comicId: Int
+    ): Response<List<DetailComic>> {
+        return apiHelper.findListDetailComic(page, name, comicId)
     }
 }
 

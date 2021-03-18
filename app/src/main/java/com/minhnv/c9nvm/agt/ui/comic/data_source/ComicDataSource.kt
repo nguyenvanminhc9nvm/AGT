@@ -5,12 +5,17 @@ import com.minhnv.c9nvm.agt.data.DataManager
 import com.minhnv.c9nvm.agt.data.model.Comic
 
 class ComicDataSource(
-    private val mDataManager: DataManager
+    private val mDataManager: DataManager,
+    private val name: String = ""
 ): PagingSource<Int, Comic>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comic> {
         try {
             val currentLoadingPageKey = params.key ?: 1
-            val response = mDataManager.getListComic(currentLoadingPageKey)
+            val response = if (name.isEmpty()) {
+                mDataManager.getListComic(currentLoadingPageKey)
+            } else {
+                mDataManager.findListComic(name, currentLoadingPageKey)
+            }
             val prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey - 1
             val responseData = mutableListOf<Comic>()
             val data = response.body()?.toMutableList() ?: mutableListOf()
