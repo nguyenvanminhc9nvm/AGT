@@ -20,7 +20,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Activit
     }
 
     override fun initView() {
-        MobileAds.initialize(this)
+        MobileAds.initialize(this){}
         supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, AGTFragment())
             .commit()
     }
