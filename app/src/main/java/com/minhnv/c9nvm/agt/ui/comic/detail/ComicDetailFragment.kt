@@ -42,7 +42,7 @@ class ComicDetailFragment :
         binding.toolbarDetailComic.title = arguments?.getString(COMIC_NAME) ?: ""
         comicDetailAdapter = ComicDetailAdapter {
             val bundle = Bundle()
-            bundle.putInt(AGTConstant.DESCRIPTION_ID, it.comicId)
+            bundle.putInt(AGTConstant.DESCRIPTION_ID, it.descriptionComicId)
             activityController.switchFragment(ComicDescriptionFragment(), bundle)
         }
         comicDetailAdapter.withLoadStateFooter(FooterAdapter())

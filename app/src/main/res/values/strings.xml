@@ -14,4 +14,6 @@
     <string name="cancel">Cancel</string>
     <string name="select_time_skip">Auto scroll with time: </string>
     <string name="send">send</string>
+    <string name="auto_scroll">auto scroll</string>
+    <string name="stop">stop</string>
 </resources>

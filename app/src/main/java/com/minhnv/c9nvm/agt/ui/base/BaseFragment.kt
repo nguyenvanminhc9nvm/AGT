@@ -32,7 +32,7 @@ abstract class BaseFragment<V : BaseViewModel, VB : ViewBinding> : DaggerFragmen
 
     lateinit var activityController: ActivityController
 
-    private val compositeDisposable = CompositeDisposable()
+    val compositeDisposable = CompositeDisposable()
 
     lateinit var viewModel: V
 

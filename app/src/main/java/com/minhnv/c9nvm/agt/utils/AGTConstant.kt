@@ -18,6 +18,7 @@ object AGTConstant {
     const val DESCRIPTION_ID = "DESCRIPTION_ID"
     const val STATE_LIST = "STATE_LIST"
     const val ADMOB_AD_UNIT_ID = "ca-app-pub-3940256099942544/2247696110"
+    const val DB_NAME = "AGT_DB"
 }
 
 val Context.dataStore : DataStore<Preferences> by preferencesDataStore("preferencesKey")

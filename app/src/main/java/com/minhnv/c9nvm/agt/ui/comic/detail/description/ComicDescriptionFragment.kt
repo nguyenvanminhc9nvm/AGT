@@ -2,6 +2,7 @@ package com.minhnv.c9nvm.agt.ui.comic.detail.description
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.minhnv.c9nvm.agt.R
@@ -10,6 +11,8 @@ import com.minhnv.c9nvm.agt.ui.base.BaseFragment
 import com.minhnv.c9nvm.agt.ui.comic.adapter.DescriptionComicAdapter
 import com.minhnv.c9nvm.agt.utils.AGTConstant
 import io.reactivex.Observable
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class ComicDescriptionFragment :
@@ -29,6 +32,14 @@ class ComicDescriptionFragment :
     }
 
     override fun bindViewModel() {
+        val comicId = arguments?.getInt(AGTConstant.DESCRIPTION_ID)
+        lifecycleScope.launch {
+            viewModel.getPageWithComicId(comicId ?: 0).collect {
+                binding.vpDescriptionComic.postDelayed({
+                    binding.vpDescriptionComic.setCurrentItem(it, true)
+                }, 200)
+            }
+        }
         val array = arrayOf(
             "5 second",
             "10 second",
@@ -54,10 +65,10 @@ class ComicDescriptionFragment :
                     }.addToDisposable()
                 dig.dismiss()
             }.show()
-        val comicId = arguments?.getInt(AGTConstant.DESCRIPTION_ID)
         viewModel.getListComicDescription(comicId ?: 0)
         viewModel.listComicDescription.observe(viewLifecycleOwner) {
             descriptionAdapter.set(it)
+            binding.vpDescriptionComic.offscreenPageLimit = descriptionAdapter.itemCount
         }
         binding.vpDescriptionComic.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
@@ -68,4 +79,10 @@ class ComicDescriptionFragment :
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        println("#comic save pos: $page")
+        val comicId = arguments?.getInt(AGTConstant.DESCRIPTION_ID)
+        viewModel.savePageWithComicId(comicId ?: 0, page)
+    }
 }

@@ -14,5 +14,7 @@ data class DetailComic(
     @SerializedName("create_at")
     val createAt: String,
     @SerializedName("name_comic")
-    val nameComic: String
+    val nameComic: String,
+    @SerializedName("description_comic_id")
+    val descriptionComicId: Int
 )

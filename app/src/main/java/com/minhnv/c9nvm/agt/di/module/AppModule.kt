@@ -2,15 +2,21 @@ package com.minhnv.c9nvm.agt.di.module
 
 import android.app.Application
 import android.content.Context
+import androidx.room.Room
 import com.minhnv.c9nvm.agt.data.AppDataManager
 import com.minhnv.c9nvm.agt.data.DataManager
 import com.minhnv.c9nvm.agt.data.local.AppDataStoreHelper
 import com.minhnv.c9nvm.agt.data.local.DataStoreHelper
+import com.minhnv.c9nvm.agt.data.local.db.AppDatabase
+import com.minhnv.c9nvm.agt.data.local.db.AppDbHelper
+import com.minhnv.c9nvm.agt.data.local.db.DBHelper
 import com.minhnv.c9nvm.agt.data.remote.ApiService
 import com.minhnv.c9nvm.agt.data.remote.AppApiHelper
+import com.minhnv.c9nvm.agt.di.Databases
 import com.minhnv.c9nvm.agt.di.DefaultDispatcher
 import com.minhnv.c9nvm.agt.di.IoDispatcher
 import com.minhnv.c9nvm.agt.di.MainDispatcher
+import com.minhnv.c9nvm.agt.utils.AGTConstant
 import com.minhnv.c9nvm.agt.utils.rx.AppSchedulerProvider
 import com.minhnv.c9nvm.agt.utils.rx.SchedulerProvider
 import dagger.Module
@@ -49,8 +55,12 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun providerDataManager(apiHelper: ApiService, dataStoreHelper: DataStoreHelper): DataManager {
-        return AppDataManager(apiHelper, dataStoreHelper)
+    fun providerDataManager(
+        apiHelper: ApiService,
+        dataStoreHelper: DataStoreHelper,
+        dbHelper: DBHelper
+    ): DataManager {
+        return AppDataManager(apiHelper, dataStoreHelper, dbHelper)
     }
 
     @DefaultDispatcher
@@ -64,5 +74,21 @@ class AppModule {
     @MainDispatcher
     @Provides
     fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+
+    @Databases
+    @Provides
+    fun provideDatabaseName() = AGTConstant.DB_NAME
+
+    @Provides
+    @Singleton
+    fun providerAppDatabase(@Databases dbName: String, context: Context): AppDatabase {
+        return Room.databaseBuilder(context, AppDatabase::class.java, dbName).build()
+    }
+
+    @Provides
+    @Singleton
+    fun providerDBHelper(appDbHelper: AppDbHelper): DBHelper {
+        return appDbHelper
+    }
 
 }

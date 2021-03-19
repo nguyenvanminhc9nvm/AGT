@@ -1,6 +1,7 @@
 package com.minhnv.c9nvm.agt.data
 
 import com.minhnv.c9nvm.agt.data.local.DataStoreHelper
+import com.minhnv.c9nvm.agt.data.local.db.DBHelper
 import com.minhnv.c9nvm.agt.data.model.*
 import com.minhnv.c9nvm.agt.data.remote.ApiService
 import kotlinx.coroutines.flow.Flow
@@ -11,15 +12,16 @@ import javax.inject.Singleton
 @Singleton
 class AppDataManager @Inject constructor(
     private val apiHelper: ApiService,
-    private val dataStoreHelper: DataStoreHelper
+    private val dataStoreHelper: DataStoreHelper,
+    private val dbHelper: DBHelper
 ): DataManager {
 
-    override suspend fun savePage(page: Int) {
-        return dataStoreHelper.savePage(page)
+    override suspend fun savePageWithComicId(comicId: Int, page: Int) {
+        return dataStoreHelper.savePageWithComicId(comicId, page)
     }
 
-    override fun getPage(): Flow<Int> {
-        return dataStoreHelper.getPage()
+    override fun getPageWithComicId(comicId: Int): Flow<Int> {
+        return dataStoreHelper.getPageWithComicId(comicId)
     }
 
     override suspend fun getListHumor(page: Int): Response<List<Humor>> {
@@ -54,6 +56,14 @@ class AppDataManager @Inject constructor(
         comicId: Int
     ): Response<List<DetailComic>> {
         return apiHelper.findListDetailComic(page, name, comicId)
+    }
+
+    override suspend fun insertPage(comicId: Int, page: Int) {
+        return dbHelper.insertPage(comicId, page)
+    }
+
+    override suspend fun getPage(comicId: Int): Int {
+        return dbHelper.getPage(comicId)
     }
 }
 
