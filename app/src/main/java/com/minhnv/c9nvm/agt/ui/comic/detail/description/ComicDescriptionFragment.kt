@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.minhnv.c9nvm.agt.R
 import com.minhnv.c9nvm.agt.databinding.ComicDescriptionFragmentBinding
@@ -19,6 +21,7 @@ class ComicDescriptionFragment :
     BaseFragment<ComicDescriptionViewModel, ComicDescriptionFragmentBinding>() {
     private lateinit var descriptionAdapter: DescriptionComicAdapter
     private var page = 0
+    private lateinit var mInterstitialAd: InterstitialAd
     override val sbindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> ComicDescriptionFragmentBinding
         get() = ComicDescriptionFragmentBinding::inflate
 
@@ -29,6 +32,8 @@ class ComicDescriptionFragment :
     override fun initView() {
         descriptionAdapter = DescriptionComicAdapter()
         binding.vpDescriptionComic.adapter = descriptionAdapter
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     override fun bindViewModel() {
@@ -41,18 +46,18 @@ class ComicDescriptionFragment :
             }
         }
         val array = arrayOf(
-            "5 second",
-            "10 second",
-            "15 second",
-            "20 second",
-            "30 second"
+            getString(R.string.seven_second),
+            getString(R.string.eleven_second),
+            getString(R.string.fifteen_second),
+            getString(R.string.seventeen_second),
+            getString(R.string.nineteen_second)
         )
         MaterialAlertDialogBuilder(mActivity)
             .setTitle(getString(R.string.select_time_skip))
             .setNeutralButton(getString(R.string.cancel)) { dig, w ->
                 dig.dismiss()
             }
-            .setSingleChoiceItems(array, 1) { dig, pos ->
+            .setSingleChoiceItems(array, 0) { dig, pos ->
                 val time = array[pos].filter { it.isDigit() }.toLong()
                 Observable.interval(time, TimeUnit.SECONDS)
                     .filter {

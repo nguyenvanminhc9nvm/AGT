@@ -1,5 +1,6 @@
 package com.minhnv.c9nvm.agt.di.builder
 
+import com.minhnv.c9nvm.agt.ui.admob_inside.AdmobInsideFragment
 import com.minhnv.c9nvm.agt.ui.comic.ComicFragment
 import com.minhnv.c9nvm.agt.ui.comic.detail.ComicDetailFragment
 import com.minhnv.c9nvm.agt.ui.comic.detail.description.ComicDescriptionFragment
@@ -33,5 +34,8 @@ abstract class MainFragmentModule {
 
     @ContributesAndroidInjector
     abstract fun menuFragment(): MenuFragment
+
+    @ContributesAndroidInjector
+    abstract fun admobInsideFragment(): AdmobInsideFragment
 
 }

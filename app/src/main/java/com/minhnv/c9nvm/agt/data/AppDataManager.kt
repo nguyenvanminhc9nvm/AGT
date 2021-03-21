@@ -15,14 +15,12 @@ class AppDataManager @Inject constructor(
     private val dataStoreHelper: DataStoreHelper,
     private val dbHelper: DBHelper
 ): DataManager {
-
-    override suspend fun savePageWithComicId(comicId: Int, page: Int) {
-        return dataStoreHelper.savePageWithComicId(comicId, page)
+    override suspend fun saveFirstTimeSeeAdMob(isFirst: Boolean) {
+        return dataStoreHelper.saveFirstTimeSeeAdMob(isFirst)
     }
 
-    override fun getPageWithComicId(comicId: Int): Flow<Int> {
-        return dataStoreHelper.getPageWithComicId(comicId)
-    }
+    override val isFirstTimeSeeAdMob: Flow<Boolean>
+        get() = dataStoreHelper.isFirstTimeSeeAdMob
 
     override suspend fun getListHumor(page: Int): Response<List<Humor>> {
         return apiHelper.getListHumor(page)

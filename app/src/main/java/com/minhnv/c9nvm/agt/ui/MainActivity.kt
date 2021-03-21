@@ -20,13 +20,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Activit
     }
 
     override fun initView() {
-        MobileAds.initialize(this){}
+        MobileAds.initialize(this)
         supportFragmentManager.beginTransaction().replace(R.id.nav_host_fragment, AGTFragment())
             .commit()
     }
 
     override fun bindViewModel() {
-
+        viewModel.saveFirstSignInApp(true)
     }
 
     override fun switchFragment(fragmentId: BaseFragment<*, *>, bundle: Bundle?) {
@@ -42,5 +42,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(), Activit
             )
             .replace(R.id.nav_host_fragment, fragmentId)
             .commit()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.saveFirstSignInApp(false)
     }
 }

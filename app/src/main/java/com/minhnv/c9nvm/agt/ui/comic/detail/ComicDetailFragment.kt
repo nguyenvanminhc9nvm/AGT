@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.minhnv.c9nvm.agt.R
 import com.minhnv.c9nvm.agt.databinding.ComicDetailFragmentBinding
 import com.minhnv.c9nvm.agt.ui.MainActivity
@@ -36,6 +37,7 @@ class ComicDetailFragment :
     }
 
     override fun initView() {
+        viewModel.getIsFirstSignInApp()
         linearLayoutManager = LinearLayoutManager(mActivity)
         setHasOptionsMenu(true)
         (mActivity as MainActivity).setSupportActionBar(binding.toolbarDetailComic)
@@ -64,6 +66,19 @@ class ComicDetailFragment :
         }
         comicDetailAdapter.addLoadStateListener {
             binding.swDetailComic.isRefreshing = it.source.refresh is LoadState.Loading
+            if (it.prepend is LoadState.Error || it.append is LoadState.Error || it.refresh is LoadState.Error) {
+                MaterialAlertDialogBuilder(mActivity)
+                    .setTitle(resources.getString(R.string.error_load_list))
+                    .setMessage(resources.getString(R.string.error_server))
+                    .setNegativeButton(resources.getString(R.string.dismiss)) { dialog, which ->
+                        dialog.dismiss()
+                    }
+                    .setPositiveButton(resources.getString(R.string.try_again)) { dialog, which ->
+                        comicDetailAdapter.refresh()
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
         }
     }
 

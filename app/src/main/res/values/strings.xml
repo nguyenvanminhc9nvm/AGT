@@ -16,4 +16,17 @@
     <string name="send">send</string>
     <string name="auto_scroll">auto scroll</string>
     <string name="stop">stop</string>
+    <string name="error_load_list">Error bro</string>
+    <string name="error_server">Server Error</string>
+    <string name="try_again">try again</string>
+    <string name="dismiss">dismiss</string>
+    <string name="three_second">3 second</string>
+    <string name="five_second">5 second</string>
+    <string name="seven_second">7 second</string>
+    <string name="nine_second">9 second</string>
+    <string name="eleven_second">11 second</string>
+    <string name="third_teen_second">13 second</string>
+    <string name="fifteen_second">15 second</string>
+    <string name="seventeen_second">17 second</string>
+    <string name="nineteen_second">19 second</string>
 </resources>

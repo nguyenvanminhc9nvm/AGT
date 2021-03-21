@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.minhnv.c9nvm.agt.data.DataManager
 import com.minhnv.c9nvm.agt.ui.MainViewModel
+import com.minhnv.c9nvm.agt.ui.admob_inside.AdmobInsideViewModel
 import com.minhnv.c9nvm.agt.ui.base.BaseViewModel
 import com.minhnv.c9nvm.agt.ui.comic.ComicViewModel
 import com.minhnv.c9nvm.agt.ui.comic.detail.ComicDetailViewModel
@@ -32,6 +33,7 @@ class ViewModelProviderFactory @Inject constructor(
             modelClass.isAssignableFrom(AGTViewModel::class.java) -> AGTViewModel() as T
             modelClass.isAssignableFrom(ComicDescriptionViewModel::class.java) -> ComicDescriptionViewModel() as T
             modelClass.isAssignableFrom(MenuViewModel::class.java) -> MenuViewModel() as T
+            modelClass.isAssignableFrom(AdmobInsideViewModel::class.java) -> MenuViewModel() as T
             else -> throw Exception("no viewModel")
         }
 

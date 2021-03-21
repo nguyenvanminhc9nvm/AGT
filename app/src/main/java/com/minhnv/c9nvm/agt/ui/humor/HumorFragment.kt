@@ -6,7 +6,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.minhnv.c9nvm.agt.R
 import com.minhnv.c9nvm.agt.databinding.HumorFragmentBinding
@@ -36,12 +39,19 @@ class HumorFragment : BaseFragment<HumorViewModel, HumorFragmentBinding>() {
 
     override fun initView() {
         setHasOptionsMenu(true)
+        humorAdapter = HumorAdapter(mActivity)
+        val builder = AdLoader.Builder(mActivity, AGTConstant.UNIT_ID_ADMOB_NATIVE)
+            .forUnifiedNativeAd {
+               humorAdapter.setAd(it)
+            }.withAdListener(object : AdListener() {
+                override fun onAdFailedToLoad(p0: LoadAdError?) {
+                    super.onAdFailedToLoad(p0)
+                    println("error ads: ${p0?.message}")
+                }
+            }).build()
+        builder.loadAd(AdRequest.Builder().build())
+
         (mActivity as MainActivity).setSupportActionBar(binding.toolbarHumor)
-        val builder = AdLoader.Builder(mActivity, AGTConstant.ADMOB_AD_UNIT_ID)
-        builder.forNativeAd {
-            println("#content ${it.body}")
-        }
-        humorAdapter = HumorAdapter(mActivity, null)
         humorAdapter.withLoadStateFooter(footer = FooterAdapter())
         with(binding.rycHumor) {
             layoutManager = LinearLayoutManager(mActivity)
@@ -54,6 +64,19 @@ class HumorFragment : BaseFragment<HumorViewModel, HumorFragmentBinding>() {
         }
         humorAdapter.addLoadStateListener {
             binding.swHumor.isRefreshing = it.source.refresh is LoadState.Loading
+            if (it.prepend is LoadState.Error || it.append is LoadState.Error || it.refresh is LoadState.Error) {
+                MaterialAlertDialogBuilder(mActivity)
+                    .setTitle(resources.getString(R.string.error_load_list))
+                    .setMessage(resources.getString(R.string.error_server))
+                    .setNegativeButton(resources.getString(R.string.dismiss)) { dialog, which ->
+                       dialog.dismiss()
+                    }
+                    .setPositiveButton(resources.getString(R.string.try_again)) { dialog, which ->
+                        humorAdapter.refresh()
+                        dialog.dismiss()
+                    }
+                    .show()
+            }
         }
         binding.toolbarHumor.setNavigationOnClickListener {
             activityController.switchFragment(MenuFragment())
@@ -73,7 +96,8 @@ class HumorFragment : BaseFragment<HumorViewModel, HumorFragmentBinding>() {
 
     override fun bindViewModel() {
         lifecycleScope.launch {
-            viewModel.listHumors.collect {
+            viewModel.listHumors
+                .collect {
                 humorAdapter.submitData(it)
             }
         }
@@ -87,13 +111,13 @@ class HumorFragment : BaseFragment<HumorViewModel, HumorFragmentBinding>() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return if (item.itemId == R.id.autoScroll) {
             val array = arrayOf(
-                "3 second",
-                "5 second",
-                "7 second",
-                "20 second",
-                "30 second"
+                getString(R.string.three_second),
+                getString(R.string.five_second),
+                getString(R.string.seven_second),
+                getString(R.string.nine_second),
+                getString(R.string.eleven_second)
             )
-            MaterialAlertDialogBuilder(mActivity)
+            val alertDialog = MaterialAlertDialogBuilder(mActivity)
                 .setTitle(getString(R.string.select_time_skip))
                 .setNeutralButton(getString(R.string.cancel)) { dig, w ->
                     dig.dismiss()
@@ -111,7 +135,10 @@ class HumorFragment : BaseFragment<HumorViewModel, HumorFragmentBinding>() {
                         }.addToDisposable()
                     binding.fabStopScroll.visibility = View.VISIBLE
                     dig.dismiss()
-                }.show()
+                }
+            if (humorAdapter.itemCount > 0) {
+                alertDialog.show()
+            }
             true
         } else {
             super.onOptionsItemSelected(item)

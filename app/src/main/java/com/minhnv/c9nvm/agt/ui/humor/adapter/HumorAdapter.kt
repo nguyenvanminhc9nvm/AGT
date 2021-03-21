@@ -7,26 +7,39 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.minhnv.c9nvm.agt.R
 import com.minhnv.c9nvm.agt.data.model.Humor
 import com.minhnv.c9nvm.agt.utils.AGTConstant
 import com.minhnv.c9nvm.agt.utils.options.loadImage
 import kotlinx.android.synthetic.main.item_ad_unifield.view.*
+import kotlinx.android.synthetic.main.item_expanded_size.view.*
 import kotlinx.android.synthetic.main.item_humor.view.*
 
-class HumorAdapter(
-    private val context: Context,
-    private val nativeAd: NativeAd?
-) :
-    PagingDataAdapter<Humor, RecyclerView.ViewHolder>(DataDifferentiators) {
 
-    companion object {
-        const val ITEM_HUMOR = 0
-        const val ITEM_ADMOB = 13
-        const val ITEM_ADMOB_1 = 33
-        const val ITEM_ADMOB_2 = 53
-    }
+class HumorAdapter(
+    private val context: Context
+) : PagingDataAdapter<Humor, RecyclerView.ViewHolder>(DataDifferentiators) {
+
+    private val adsCollapseSize = 1
+    private val adsCollapseSize1 = 20
+    private val adsCollapseSize2 = 60
+    private val adsCollapseSize3 = 80
+    private val adsExpandedSize = 10
+    private val adsExpandedSize1 = 40
+    private val adsExpandedSize2 = 90
+    private val adsExpandedSize3 = 120
+
+    private val itemHumor = 0
+    private val itemAd = adsCollapseSize
+    private val itemAd1 = adsCollapseSize1
+    private val itemAd2 = adsCollapseSize2
+    private val itemAd3 = adsCollapseSize3
+    private val itemAdFullSize = adsExpandedSize
+    private val itemAdFullSize1 = adsExpandedSize1
+    private val itemAdFullSize2 = adsExpandedSize2
+    private val itemAdFullSize3 = adsExpandedSize3
+
 
     inner class HumorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(humor: Humor?) {
@@ -57,25 +70,20 @@ class HumorAdapter(
         viewType: Int
     ): RecyclerView.ViewHolder {
         return when (viewType) {
-            ITEM_HUMOR -> {
+            itemHumor -> {
                 val view =
                     LayoutInflater.from(parent.context).inflate(R.layout.item_humor, parent, false)
                 HumorViewHolder(view)
             }
-            ITEM_ADMOB -> {
+            itemAd, itemAd2, itemAd3, itemAd1 -> {
                 val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_ad_unifield, parent, false)
                 AdsViewHolder(view)
             }
-            ITEM_ADMOB_1 -> {
+            itemAdFullSize, itemAdFullSize1, itemAdFullSize2, itemAdFullSize3 -> {
                 val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_ad_unifield, parent, false)
-                AdsViewHolder(view)
-            }
-            ITEM_ADMOB_2 -> {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_ad_unifield, parent, false)
-                AdsViewHolder(view)
+                    .inflate(R.layout.item_expanded_size, parent, false)
+                AdsExpandedViewHolder(view)
             }
             else -> {
                 val view =
@@ -88,10 +96,15 @@ class HumorAdapter(
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
-            ITEM_HUMOR -> 0
-            ITEM_ADMOB -> 15
-            ITEM_ADMOB_1 -> 35
-            ITEM_ADMOB_2 -> 55
+            itemHumor -> 0
+            itemAd -> adsCollapseSize
+            itemAdFullSize -> adsExpandedSize
+            itemAd1 -> adsCollapseSize1
+            itemAd2 -> adsCollapseSize2
+            itemAd3 -> adsCollapseSize3
+            itemAdFullSize1 -> adsExpandedSize1
+            itemAdFullSize2 -> adsExpandedSize2
+            itemAdFullSize3 -> adsExpandedSize3
             else -> -1
         }
     }
@@ -102,25 +115,33 @@ class HumorAdapter(
                 holder.bind(getItem(position))
             }
             is AdsViewHolder -> {
-                holder.bind(nativeAd)
+                holder.bind()
+            }
+            is AdsExpandedViewHolder -> {
+                holder.bind()
             }
         }
+    }
+
+    private var uniFieldAd: UnifiedNativeAd? = null
+
+    fun setAd(uni: UnifiedNativeAd) {
+        uniFieldAd = uni
     }
 
     inner class AdsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(nativeAd: NativeAd?) {
-            nativeAd?.let {
-                itemView.ad_media.setMediaContent(nativeAd.mediaContent)
-                itemView.ad_headline.text = nativeAd.headline
-                itemView.ad_body.text = nativeAd.body
-                itemView.ad_call_to_action.text = nativeAd.callToAction
-                itemView.ad_app_icon.setImageDrawable(nativeAd.icon.drawable)
-                itemView.ad_price.text = nativeAd.price
-                itemView.ad_stars.rating = nativeAd.starRating.toFloat()
-                itemView.ad_store.text = nativeAd.store
-                itemView.ad_advertiser.text = nativeAd.advertiser
+        fun bind() {
+            uniFieldAd?.let {
+                itemView.my_template.setNativeAd(it)
             }
         }
     }
 
+    inner class AdsExpandedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind() {
+            uniFieldAd?.let {
+                itemView.templateExpanded.setNativeAd(it)
+            }
+        }
+    }
 }

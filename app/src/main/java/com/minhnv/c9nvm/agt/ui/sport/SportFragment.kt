@@ -9,6 +9,7 @@ import com.minhnv.c9nvm.agt.ui.sport.adapter.ScoreAdapter
 
 class SportFragment : BaseFragment<SportViewModel, SportFragmentBinding>() {
     private lateinit var scoreAdapter: ScoreAdapter
+
     override val sbindingInflater: (LayoutInflater, ViewGroup?, Boolean) -> SportFragmentBinding
         get() = SportFragmentBinding::inflate
 

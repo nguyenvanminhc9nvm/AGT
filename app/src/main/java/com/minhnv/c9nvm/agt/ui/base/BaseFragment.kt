@@ -45,14 +45,12 @@ abstract class BaseFragment<V : BaseViewModel, VB : ViewBinding> : DaggerFragmen
 
     abstract fun bindViewModel()
 
-
-
     private val gridLayoutManager = GridLayoutManager(context, 2)
 
     private lateinit var mProgressDialog: BaseActivity.ProgressDialog
 
     @Suppress("UNCHECKED_CAST")
-    protected val binding : VB
+    protected val binding: VB
         get() = _binding as VB
 
 
@@ -88,13 +86,13 @@ abstract class BaseFragment<V : BaseViewModel, VB : ViewBinding> : DaggerFragmen
 
 
     private fun bindLoading() {
-        viewModel.mProgressBar.subscribeOn(schedulerProvider.ui).subscribe {
-            if (it) {
-                showLoading()
-            } else {
-                hideLoading()
-            }
-        }.addToDisposable()
+//        viewModel.mProgressBar.subscribeOn(schedulerProvider.ui).subscribe {
+//            if (it) {
+//                showLoading()
+//            } else {
+//                hideLoading()
+//            }
+//        }.addToDisposable()
     }
 
 

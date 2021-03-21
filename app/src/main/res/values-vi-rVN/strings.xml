@@ -11,4 +11,20 @@
     <string name="select">Chọn</string>
     <string name="cancel">Thôi</string>
     <string name="select_time_skip">"Tự động cuộn với thời gian là: "</string>
+    <string name="send">Gửi</string>
+    <string name="auto_scroll">Tự cuộn cho đỡ mỏi tay</string>
+    <string name="stop">dừng cuộn</string>
+    <string name="error_load_list">Lỗi này brp</string>
+    <string name="error_server">Chắc do server, thử lại đi</string>
+    <string name="try_again">thử lại nè</string>
+    <string name="dismiss">thôi kệ</string>
+    <string name="three_second">3 giây</string>
+    <string name="five_second">5 giây</string>
+    <string name="seven_second">7 giây</string>
+    <string name="nine_second">9 giây</string>
+    <string name="eleven_second">11 giây</string>
+    <string name="third_teen_second">13 giây</string>
+    <string name="fifteen_second">15 giây</string>
+    <string name="seventeen_second">17 giây</string>
+    <string name="nineteen_second">19 giây</string>
 </resources>

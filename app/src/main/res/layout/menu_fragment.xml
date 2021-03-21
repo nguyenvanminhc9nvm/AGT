@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.menu.MenuFragment"
     android:background="@color/black"
@@ -24,4 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
         android:text="@string/send" />
+
+    <com.google.android.ads.nativetemplates.TemplateView
+        android:id="@+id/templateMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:gnt_template_type="@layout/gnt_small_template_view" />
 </LinearLayout>

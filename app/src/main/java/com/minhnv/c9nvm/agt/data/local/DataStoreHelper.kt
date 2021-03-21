@@ -3,7 +3,7 @@ package com.minhnv.c9nvm.agt.data.local
 import kotlinx.coroutines.flow.Flow
 
 interface DataStoreHelper {
-    suspend fun savePageWithComicId(comicId: Int, page: Int)
+    suspend fun saveFirstTimeSeeAdMob(isFirst: Boolean)
 
-    fun getPageWithComicId(comicId: Int): Flow<Int>
+    val isFirstTimeSeeAdMob: Flow<Boolean>
 }
